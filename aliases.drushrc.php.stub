@@ -20,6 +20,10 @@ $server_definition_defaults = array(
   ),
   'deploy-via' => 'RemoteCache',
   'branch' => 'prod',
+  'path-aliases' => array(
+    '%dump-dir' => '~/tmp',
+    '%dump' => '~/tmp/' . $sitename . '-' . date('Ymd-his') . '-dump.sql',
+    ),
 );
 
 $cid = 'amazeeio_aliases_' . $sitename;
@@ -44,7 +48,6 @@ else {
     return;
   }
   $servers_definition = json_decode($json, TRUE);
-  
 
   // Adding the default server definitions into all servers.
   foreach ($servers_definition['servers'] as $server => $server_definition) {
