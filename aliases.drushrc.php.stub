@@ -32,7 +32,7 @@ foreach (array(TRUE, FALSE) as $follow_symlinks) {
 // An .amazeeio.yml file has been found, let's try to load the sitegroup from it.
 if ($amazeeioyml_path) {
   drush_log(sprintf('Using .amazeeio.yml file at: "%s"', $amazeeioyml_path));
-  $amazeeioyml = Drush\Make\Parser\ParserYaml::parse($amazeeioyml_path);
+  $amazeeioyml = Drush\Make\Parser\ParserYaml::parse(file_get_contents($amazeeioyml_path));
   if ($amazeeioyml['sitegroup']) {
     $sitegroup_name = $amazeeioyml['sitegroup'];
     drush_log(sprintf('Discovered sitegroup name "%s" from .amazeeio.yml file', $sitegroup_name));
