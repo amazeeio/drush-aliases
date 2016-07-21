@@ -57,7 +57,7 @@ if ($sitegroup_name === FALSE) {
 
 // Some special things to make sure Jenkins does never cache the aliases.
 $suffix = getenv('JENKINS_HOME') ? '_' . getenv('BUILD_NUMBER') : '';
-$cid = "amazeeio_aliases_${identifier}${$suffix}";
+$cid = "amazeeio_aliases_${$sitegroup_name}${$suffix}";
 
 // Try to pull the aliases from the cache.
 $cache = drush_cache_get($cid);
