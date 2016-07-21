@@ -149,9 +149,9 @@ $aliases = array_reduce($sites, function ($carry, $item) use ($defaults) {
   $site_host = $item->siteHost;
   $web_root = $item->webRoot;
   if ($site_environment == 'production') {
-    $site_url = $item->domains[0];
+    $site_url = 'http://' . $item->domains[0];
   } else {
-    $site_url = implode('.', [$item->domains[0], $site_branch, $server_names[0], 'amazee.io']);
+    $site_url = 'http://' . implode('.', [$item->domains[0], $site_branch, $server_names[0], 'amazee.io']);
   }
 
   $aliases = [];
@@ -170,7 +170,7 @@ $aliases = array_reduce($sites, function ($carry, $item) use ($defaults) {
       'root' => "/var/www/$site_name/public_html/$web_root",
       'branch' => $site_branch,
       'deploy-via' => $site_environment == 'production' ? "RemoteCache" : "Pull",
-      'url' => $site_url
+      'uri' => $site_url
     ];
   }
 
