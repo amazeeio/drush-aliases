@@ -4,6 +4,7 @@ if (empty($sitegroup_name)) {
   // You know nothing, John amazee.io
   $amazeeioyml_path = $amazeeioyml = $sitegroup_name = FALSE;
   
+  drush_log(sprintf('Finding Drupal Root'));
   $path = drush_locate_root(drush_get_option('root')) ?: getcwd(); // trying to find the main root folder of drupal, if that fails, just the current folder
   
   // No sitegroup name could be found, let's search for it via the .amazeeio.yml file
