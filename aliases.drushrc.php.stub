@@ -91,6 +91,7 @@ $query = sprintf('{
           serverInfrastructure
           serverIdentifier
           serverNames
+          webRoot
           domains
         }
       }
