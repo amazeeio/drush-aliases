@@ -91,6 +91,7 @@ $query = sprintf('{
           serverInfrastructure
           serverIdentifier
           serverNames
+          deployStrategy
           webRoot
           domains
         }
@@ -156,6 +157,7 @@ $aliases = array_reduce($sites, function ($carry, $item) use ($defaults) {
   $site_name = $item->siteName;
   $site_branch = str_replace('/', '_', $item->siteBranch); # siteBranches can have / in them, which is confusing for drush, so we replace them with a _
   $site_environment = $item->siteEnvironment ?: 'production'; # siteEnvironment can be null, which means it's production
+  $deploy_strategy = $item->deployStrategy ?: ($site_environment == 'production' ? "RemoteCache" : "Pull"); # if deployStrategy is set use that or define it based on the environment type
   $site_host = $item->siteHost;
   $web_root = $item->webRoot;
   if ($site_environment == 'production') {
@@ -179,7 +181,8 @@ $aliases = array_reduce($sites, function ($carry, $item) use ($defaults) {
       'remote-user' => $site_name,
       'root' => "/var/www/$site_name/public_html/$web_root",
       'branch' => $site_branch,
-      'deploy-via' => $site_environment == 'production' ? "RemoteCache" : "Pull",
+      'deploy-via' => $deploy_strategy, # BC compatibility
+      'deploy-strategy' => $deploy_strategy,      
       'uri' => $site_url
     ];
   }
