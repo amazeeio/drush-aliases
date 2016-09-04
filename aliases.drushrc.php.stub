@@ -80,6 +80,7 @@ drush_log(sprintf('Loading site configuration for "%s" from the API.', $sitegrou
 $query = sprintf('{
   siteGroup:siteGroupByName(name: "%s") {
     gitUrl
+    slack
     sites {
       edges {
         node {
@@ -135,6 +136,7 @@ $sites = array_map(function ($edge) {
 }, $response->data->siteGroup->sites->edges);
 
 $git_url = $response->data->siteGroup->gitUrl;
+$slack = $response->data->siteGroup->slack;
 
 // Default server definition, which has no site specific elements
 $defaults = [
@@ -143,7 +145,8 @@ $defaults = [
       'no-ordered-dump' => TRUE
     ],
   ],
-  'deploy-repository' => $git_url
+  'deploy-repository' => $git_url,
+  'slack' => $slack,
 ];
 
 $aliases = array_reduce($sites, function ($carry, $item) use ($defaults) {
