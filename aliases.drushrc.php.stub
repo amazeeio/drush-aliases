@@ -1,5 +1,10 @@
 global $sitegroup_name;
 
+// Allow to override sitegroup via environment variable
+if (getenv('AMAZEEIO_OVERRIDE_SITEGROUP')) {
+  $sitegroup_name = getenv('AMAZEEIO_OVERRIDE_SITEGROUP');
+}
+
 if (empty($sitegroup_name)) {
   // You know nothing, John amazee.io
   $amazeeioyml_path = $amazeeioyml = $sitegroup_name = FALSE;
