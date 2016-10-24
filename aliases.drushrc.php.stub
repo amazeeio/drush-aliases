@@ -130,7 +130,7 @@ if ($response === FALSE) {
   $info = var_export(curl_getinfo($curl), TRUE);
   curl_close($curl);
 
-  drush_log('Curl request failed. Additional information:', 'warning');
+//  drush_log('Curl request failed. Additional information:', 'warning');
   drush_log($info, 'warning');  
   exit;
 }
