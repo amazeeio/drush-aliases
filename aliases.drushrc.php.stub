@@ -163,6 +163,7 @@ $defaults = [
   'slack' => $slack,
   'client' => $client_name,
   'sitegroup' => $sitegroup_name,
+  'ssh-options' => "-o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no",
 ];
 
 $aliases = array_reduce($sites, function ($carry, $item) use ($defaults) {
@@ -186,7 +187,7 @@ $aliases = array_reduce($sites, function ($carry, $item) use ($defaults) {
     $conditional = [];
     if (in_array($server_infrastructure, ['single', 'cluster'])) {
       $conditional = [
-        'ssh-options' => "-o ProxyCommand=\"ssh -W %h:%p frontend1.$site_host.amazee.io $LC_AMAZEEIO_SSH_OPTIONS -o USER=$site_name 2> /dev/null\"",
+        'ssh-options' => "-o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o ProxyCommand=\"ssh -W %h:%p frontend1.$site_host.amazee.io -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no $LC_AMAZEEIO_SSH_OPTIONS -o USER=$site_name 2> /dev/null\"",
       ];
     }
 
