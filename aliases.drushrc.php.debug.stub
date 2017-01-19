@@ -125,7 +125,7 @@ curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode(array(
 )));
 
 $response = curl_exec($curl);
-die(var_dump($response));
+drush_log(var_dump($response), 'info');
 // Check if the curl request succeeded.
 if ($response === FALSE) {
   $info = var_export(curl_getinfo($curl), TRUE);
