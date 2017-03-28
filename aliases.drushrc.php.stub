@@ -112,7 +112,7 @@ $query = sprintf('{
   }
 }', $sitegroup_name);
 
-$api = 'https://api.amazeeio.cloud/graphql';
+$api = getenv('AMAZEEIO_OVERRIDE_API_ENDPOINT') ? getenv('AMAZEEIO_OVERRIDE_API_ENDPOINT') : 'https://api.amazeeio.cloud/graphql';
 $curl = curl_init($api);
 
 // Build up the curl options for the GraphQL query. When using the content type
